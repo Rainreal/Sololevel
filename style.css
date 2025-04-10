@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 
-body {
+body, .mobile-body {
     height: 100vh;
-    background-image: url('Anmeldung.png'); /* Hintergrundbild */
+    background-image: url('Anmeldung.png');
     background-size: cover;
     background-position: center;
     font-family: 'Segoe UI', sans-serif;
@@ -21,25 +21,31 @@ body {
     color: white;
     width: 300px;
     position: relative;
-    margin-top: 265px; /* Verschiebt die Box nach unten */
+    margin-top: 265px;
+}
+
+.mobile-login-container {
+    padding: 20px;
+    text-align: center;
+    color: white;
+    width: 90%;
+    max-width: 320px;
+    margin: auto;
+    margin-top: 100px;
 }
 
 .username-input {
     padding: 10px;
-    width: 80%;
+    width: 100%;
     margin-bottom: 15px;
-    border: 2px solid #6a9df1; /* Rand des Eingabefelds mit Blau */
+    border: 2px solid #6a9df1;
     border-radius: 10px;
     font-size: 16px;
-    background-color: #6a9df1; /* Etwas helleres Blau */
-    color: white; /* Weißer Text */
-    transition: 0.3s ease-in-out;
-
-    /* Dauerhafter leuchtender Effekt */
-    box-shadow: 0 0 8px 2px rgba(0, 195, 255, 0.6); /* Leuchthintergrund */
+    background-color: #6a9df1;
+    color: white;
+    box-shadow: 0 0 8px 2px rgba(0, 195, 255, 0.6);
 }
 
-/* Platzhaltertext auf Weiß setzen */
 .username-input::placeholder {
     color: white;
 }
@@ -55,20 +61,6 @@ button {
     transition: 0.3s;
 }
 
-/* Hover-Effekt für den Button */
 button:hover {
     background-color: #007aa6;
-}
-
-/* Media Queries für mobile Geräte */
-@media (max-width: 768px) {
-    body {
-        transform: scale(0.8); /* Seite etwas kleiner darstellen */
-        transform-origin: top center;
-        overflow-x: hidden;
-    }
-
-    .login-container {
-        margin-top: 200px; /* Etwas weniger Abstand oben */
-    }
 }

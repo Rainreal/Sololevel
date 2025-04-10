@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Leveling App - Mobile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container mobile">
+        <input type="text" id="username" class="username-input" placeholder="Enter your name">
+        <button onclick="start()">Start</button>
+    </div>
+
+    <script>
+        function start() {
+            const name = document.getElementById("username").value;
+            if (name.trim() !== "") {
+                localStorage.setItem("username", name);
+                window.location.href = "main.html";
+            } else {
+                alert("Please enter your name.");
+            }
+        }
+    </script>
+</body>
+</html>
