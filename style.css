@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-image: url('Anmeldung.png'); /* Hintergrundbild */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    padding: 30px;
+    text-align: center;
+    color: white;
+    width: 300px;
+    position: relative;
+    margin-top: 265px; /* Verschiebt die Box nach unten */
+}
+
+.username-input {
+    padding: 10px;
+    width: 80%;
+    margin-bottom: 15px;
+    border: 2px solid #6a9df1; /* Rand des Eingabefelds mit Blau */
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #6a9df1; /* Etwas helleres Blau */
+    color: white; /* Weißer Text */
+    transition: 0.3s ease-in-out;
+    
+    /* Dauerhafter leuchtender Effekt */
+    box-shadow: 0 0 8px 2px rgba(0, 195, 255, 0.6); /* Leuchthintergrund */
+}
+
+/* Platzhaltertext auf Weiß setzen */
+.username-input::placeholder {
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #00c3ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover-Effekt für den Button */
+button:hover {
+    background-color: #007aa6;
+}
+
+/* Media Queries für mobile Geräte */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 20px;
+    }
+    .login-container h1 {
+        font-size: 24px;
+    }
+    .login-container input {
+        font-size: 14px;
+    }
+    .login-container button {
+        font-size: 14px;
+    }
+}
