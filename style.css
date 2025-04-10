@@ -6,46 +6,45 @@
 
 body {
     height: 100vh;
-    background-image: url('Anmeldung.png'); /* Hintergrundbild */
+    background-image: url('Anmeldung.png');
     background-size: cover;
     background-position: center;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .login-container {
-    padding: 30px;
+    padding: 30px 20px;
     text-align: center;
     color: white;
-    width: 300px;
-    position: relative;
-    margin-top: 265px; /* Verschiebt die Box nach unten */
+    width: 100%;
+    max-width: 350px;
+    background-color: rgba(0, 0, 0, 0.5); /* leichter dunkler Hintergrund */
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
 }
 
 .username-input {
-    padding: 10px;
-    width: 80%;
-    margin-bottom: 15px;
-    border: 2px solid #6a9df1; /* Rand des Eingabefelds mit Blau */
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 2px solid #6a9df1;
     border-radius: 10px;
     font-size: 16px;
-    background-color: #6a9df1; /* Etwas helleres Blau */
-    color: white; /* Weißer Text */
-    transition: 0.3s ease-in-out;
-    
-    /* Dauerhafter leuchtender Effekt */
-    box-shadow: 0 0 8px 2px rgba(0, 195, 255, 0.6); /* Leuchthintergrund */
+    background-color: #6a9df1;
+    color: white;
+    box-shadow: 0 0 8px 2px rgba(0, 195, 255, 0.6);
 }
 
-/* Platzhaltertext auf Weiß setzen */
 .username-input::placeholder {
     color: white;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 16px;
     background-color: #00c3ff;
     color: white;
@@ -53,25 +52,20 @@ button {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
+    width: 100%;
 }
 
-/* Hover-Effekt für den Button */
 button:hover {
     background-color: #007aa6;
 }
 
-/* Media Queries für mobile Geräte */
 @media (max-width: 768px) {
     .login-container {
         padding: 20px;
     }
-    .login-container h1 {
-        font-size: 24px;
-    }
-    .login-container input {
-        font-size: 14px;
-    }
-    .login-container button {
+
+    .username-input,
+    button {
         font-size: 14px;
     }
 }
