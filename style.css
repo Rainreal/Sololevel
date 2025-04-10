@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 
-body, .mobile-body {
+body {
     height: 100vh;
-    background-image: url('Anmeldung.png');
+    background-image: url('Anmeldung.png'); /* Hintergrundbild */
     background-size: cover;
     background-position: center;
     font-family: 'Segoe UI', sans-serif;
@@ -21,28 +21,21 @@ body, .mobile-body {
     color: white;
     width: 300px;
     position: relative;
-    margin-top: 265px;
-}
-
-.mobile-login-container {
-    padding: 20px;
-    text-align: center;
-    color: white;
-    width: 90%;
-    max-width: 320px;
-    margin: auto;
-    margin-top: 100px;
+    margin-top: 265px; /* Verschiebt die Box nach unten */
 }
 
 .username-input {
     padding: 10px;
-    width: 100%;
+    width: 80%;
     margin-bottom: 15px;
     border: 2px solid #6a9df1;
     border-radius: 10px;
     font-size: 16px;
     background-color: #6a9df1;
     color: white;
+    transition: 0.3s ease-in-out;
+
+    /* Dauerhafter Leuchteffekt */
     box-shadow: 0 0 8px 2px rgba(0, 195, 255, 0.6);
 }
 
@@ -63,4 +56,29 @@ button {
 
 button:hover {
     background-color: #007aa6;
+}
+
+/* ===== MOBILE VERSION ===== */
+@media (max-width: 768px) {
+    body.mobile {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top center;
+    }
+
+    .login-container {
+        width: 90%;
+        margin-top: 180px;
+        padding: 20px;
+    }
+
+    .username-input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 }
