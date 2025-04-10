@@ -1,3 +1,4 @@
+/* Reset-Grundregeln */
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +22,7 @@ body {
     color: white;
     width: 300px;
     position: relative;
-    margin-top: 265px; /* Verschiebt die Box nach unten */
+    margin-top: 265px; /* Box nach unten verschieben */
 }
 
 .username-input {
@@ -34,8 +35,6 @@ body {
     background-color: #6a9df1;
     color: white;
     transition: 0.3s ease-in-out;
-
-    /* Dauerhafter Leuchteffekt */
     box-shadow: 0 0 8px 2px rgba(0, 195, 255, 0.6);
 }
 
@@ -58,23 +57,26 @@ button:hover {
     background-color: #007aa6;
 }
 
-/* ===== MOBILE VERSION ===== */
+/* ==== Mobile Anpassung ==== */
 @media (max-width: 768px) {
-    body.mobile {
+    body {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: top center;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
     .login-container {
         width: 90%;
-        margin-top: 180px;
+        margin-top: 160px;
         padding: 20px;
     }
 
     .username-input {
         font-size: 14px;
         padding: 8px;
+        width: 90%;
     }
 
     button {
