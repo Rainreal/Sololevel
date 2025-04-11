@@ -201,13 +201,7 @@
         localStorage.removeItem("data_" + username);
         localStorage.removeItem("username");
       }
-
-      // Automatische Weiterleitung je nach Gerät
-      if (window.innerWidth <= 768) {
-        window.location.href = "Index_mobile.html"; // Handy
-      } else {
-        window.location.href = "Index.html"; // PC
-      }
+      window.location.href = "index.html"; // ✅ jetzt klein geschrieben!
     }
   </script>
 </body>
