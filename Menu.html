@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solo Leveling - Menu</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url('menu.png') no-repeat center center/cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .menu-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 380px;
+      margin: 100px auto 0 auto;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: left;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    }
+
+    .user-info {
+      margin-bottom: 20px;
+    }
+
+    .user-info h2 {
+      margin: 0;
+    }
+
+    .user-info p {
+      margin: 5px 0 0 0;
+      color: yellow;
+      font-weight: bold;
+    }
+
+    .stat {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      align-items: center;
+      margin: 15px 0;
+      gap: 10px;
+    }
+
+    .stat span {
+      font-size: 18px;
+    }
+
+    .stat button {
+      padding: 5px 10px;
+      font-size: 16px;
+      background-color: #00c3ff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .points {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 18px;
+    }
+
+    .logout-button {
+      display: block;
+      margin: 30px auto 0 auto;
+      padding: 10px 20px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .confirm-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(30, 30, 30, 0.95);
+      border-radius: 12px;
+      padding: 25px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      display: none;
+      z-index: 1000;
+    }
+
+    .confirm-box p {
+      margin-bottom: 20px;
+    }
+
+    .confirm-box button {
+      margin: 0 10px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .yes-button {
+      background-color: red;
+      color: white;
+    }
+
+    .no-button {
+      background-color: #00c3ff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <div class="user-info">
+      <h2 id="usernameDisplay"></h2>
+      <p id="levelDisplay">Level: 1</p>
+    </div>
+
+    <div class="stat">
+      <span>Strength:</span>
+      <span id="strength">0</span>
+      <button onclick="addStat('strength')">+</button>
+    </div>
+    <div class="stat">
+      <span>Speed:</span>
+      <span id="speed">0</span>
+      <button onclick="addStat('speed')">+</button>
+    </div>
+    <div class="stat">
+      <span>Health:</span>
+      <span id="health">0</span>
+      <button onclick="addStat('health')">+</button>
+    </div>
+
+    <div class="points">Available Points: <span id="points">0</span></div>
+
+    <button class="logout-button" onclick="confirmLogout()">Log Out</button>
+  </div>
+
+  <div class="confirm-box" id="confirmBox">
+    <p>Do you want to delete your account?</p>
+    <button class="yes-button" onclick="logout(true)">Yes</button>
+    <button class="no-button" onclick="logout(false)">No</button>
+  </div>
+
+  <script>
+    const username = localStorage.getItem("username") || "Unknown";
+    let userData = JSON.parse(localStorage.getItem("data_" + username));
+
+    if (!userData) {
+      userData = {
+        level: 1,
+        strength: 0,
+        speed: 0,
+        health: 0,
+        points: 3  // ← Neue Benutzer starten mit 3 Punkten
+      };
+      localStorage.setItem("data_" + username, JSON.stringify(userData));
+    }
+
+    document.getElementById("usernameDisplay").textContent = username;
+    document.getElementById("levelDisplay").textContent = "Level: " + userData.level;
+    document.getElementById("strength").textContent = userData.strength;
+    document.getElementById("speed").textContent = userData.speed;
+    document.getElementById("health").textContent = userData.health;
+    document.getElementById("points").textContent = userData.points;
+
+    function addStat(stat) {
+      if (userData.points > 0) {
+        userData[stat]++;
+        userData.points--;
+        updateDisplay();
+        localStorage.setItem("data_" + username, JSON.stringify(userData));
+      }
+    }
+
+    function updateDisplay() {
+      document.getElementById("strength").textContent = userData.strength;
+      document.getElementById("speed").textContent = userData.speed;
+      document.getElementById("health").textContent = userData.health;
+      document.getElementById("points").textContent = userData.points;
+    }
+
+    function confirmLogout() {
+      document.getElementById("confirmBox").style.display = "block";
+    }
+
+    function logout(deleteData) {
+      document.getElementById("confirmBox").style.display = "none";
+      if (deleteData) {
+        localStorage.removeItem("data_" + username);
+        localStorage.removeItem("username");
+      }
+      window.location.href = "Index_mobile.html";
+    }
+  </script>
+</body>
+</html>
