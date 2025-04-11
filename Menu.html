@@ -163,7 +163,7 @@
         strength: 0,
         speed: 0,
         health: 0,
-        points: 3  // ← Neue Benutzer starten mit 3 Punkten
+        points: 3
       };
       localStorage.setItem("data_" + username, JSON.stringify(userData));
     }
@@ -201,7 +201,13 @@
         localStorage.removeItem("data_" + username);
         localStorage.removeItem("username");
       }
-      window.location.href = "Index_mobile.html";
+
+      // Automatische Weiterleitung je nach Gerät
+      if (window.innerWidth <= 768) {
+        window.location.href = "Index_mobile.html"; // Handy
+      } else {
+        window.location.href = "Index.html"; // PC
+      }
     }
   </script>
 </body>
