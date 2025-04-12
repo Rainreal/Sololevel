@@ -117,6 +117,36 @@
       background-color: #00c3ff;
       color: white;
     }
+
+    /* Action Buttons unten */
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .action-buttons button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      font-size: 14px;
+      background-color: #00c3ff;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00c3ff, 0 0 20px #00c3ff;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 5px #00c3ff, 0 0 10px #00c3ff;
+      }
+      100% {
+        box-shadow: 0 0 15px #00c3ff, 0 0 30px #00c3ff;
+      }
+    }
   </style>
 </head>
 <body>
@@ -145,6 +175,12 @@
     <div class="points">Available Points: <span id="points">0</span></div>
 
     <button class="logout-button" onclick="confirmLogout()">Log Out</button>
+
+    <div class="action-buttons">
+      <button onclick="location.href='quest.html'">Daily Quest</button>
+      <button onclick="location.href='items.html'">Items</button>
+      <button onclick="location.href='dungeon.html'">Dungeon</button>
+    </div>
   </div>
 
   <div class="confirm-box" id="confirmBox">
@@ -201,7 +237,7 @@
         localStorage.removeItem("data_" + username);
         localStorage.removeItem("username");
       }
-      window.location.href = "index.html"; // ✅ jetzt klein geschrieben!
+      window.location.href = "index.html";
     }
   </script>
 </body>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Quest</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url('menu.png') no-repeat center center/cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quest-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 380px;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: left;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    }
+
+    .quest {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0;
+      font-size: 18px;
+    }
+
+    .back-button {
+      display: block;
+      margin: 30px auto 0 auto;
+      padding: 10px 20px;
+      background-color: #00c3ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00c3ff, 0 0 20px #00c3ff;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 5px #00c3ff, 0 0 10px #00c3ff;
+      }
+      100% {
+        box-shadow: 0 0 15px #00c3ff, 0 0 30px #00c3ff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quest-container">
+    <h2 style="text-align:center; margin-bottom: 20px;">Daily Quest</h2>
+
+    <div class="quest">
+      <span>Running</span>
+      <span id="running-progress">0 / ?</span>
+    </div>
+
+    <div class="quest">
+      <span>Push-ups</span>
+      <span id="pushups-progress">0 / ?</span>
+    </div>
+
+    <div class="quest">
+      <span>Sit-ups</span>
+      <span id="situps-progress">0 / ?</span>
+    </div>
+
+    <button class="back-button" onclick="location.href='menu.html'">Back to Menu</button>
+  </div>
+
+  <script>
+    const username = localStorage.getItem("username");
+    const userData = JSON.parse(localStorage.getItem("data_" + username));
+
+    if (userData) {
+      document.getElementById("running-progress").textContent = `${userData.runningProgress || 0} / ${userData.runningGoal}`;
+      document.getElementById("pushups-progress").textContent = `${userData.pushupsProgress || 0} / ${userData.pushupsGoal}`;
+      document.getElementById("situps-progress").textContent = `${userData.situpsProgress || 0} / ${userData.situpsGoal}`;
+    }
+  </script>
+</body>
+</html>
