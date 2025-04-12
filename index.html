@@ -3,83 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Solo Leveling - Login</title>
+  <title>SoloTrain Login</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="login-container">
-    <input type="text" id="username" class="username-input" placeholder="Enter Username" />
+    <h2>Enter Username</h2>
+    <input type="text" id="username" class="username-input" placeholder="Username" />
     <button onclick="start()">Start</button>
   </div>
 
-  <!-- Custom Dialog -->
-  <div class="custom-dialog" id="dialogBox" style="display: none;">
-    <p id="dialogMessage">Placeholder</p>
-    <input type="number" id="dialogInput" class="username-input" placeholder="Type" />
-    <button onclick="handleDialogOk()">OK</button>
-  </div>
-
   <script>
-    let step = 0;
-    let userData = {};
-    let username = "";
-
     function start() {
-      username = document.getElementById("username").value.trim();
-      if (!username) return;
+      const username = document.getElementById("username").value.trim();
+      if (!username) return alert("Please enter a username.");
 
-      const existing = localStorage.getItem("data_" + username);
       localStorage.setItem("username", username);
 
-      if (!existing) {
-        step = 1;
-        showDialog("How much running do you want to do?");
-      } else {
-        window.location.href = "menu.html";
+      const existingData = localStorage.getItem("data_" + username);
+      if (existingData) {
+        window.location.href = "Menu.html";
+        return;
       }
+
+      askGoal("Running", "runningGoal", function() {
+        askGoal("Push-ups", "pushupsGoal", function() {
+          askGoal("Sit-ups", "situpsGoal", function() {
+            const userData = {
+              level: 1,
+              strength: 0,
+              speed: 0,
+              health: 0,
+              points: 0,
+              runningProgress: 0,
+              pushupsProgress: 0,
+              situpsProgress: 0,
+              runningGoal: parseInt(localStorage.getItem("runningGoal")),
+              pushupsGoal: parseInt(localStorage.getItem("pushupsGoal")),
+              situpsGoal: parseInt(localStorage.getItem("situpsGoal"))
+            };
+            localStorage.setItem("data_" + username, JSON.stringify(userData));
+            showWelcome(username);
+          });
+        });
+      });
     }
 
-    function showDialog(message, hideInput = false) {
-      document.getElementById("dialogMessage").textContent = message;
-      document.getElementById("dialogInput").value = "";
-      document.getElementById("dialogBox").style.display = "block";
-      document.getElementById("dialogInput").style.display = hideInput ? "none" : "inline-block";
+    function askGoal(label, key, callback) {
+      const dialog = document.createElement("div");
+      dialog.className = "custom-dialog";
+      dialog.innerHTML = `
+        <p>Set your goal for ${label}</p>
+        <input type="number" id="goalInput" class="username-input" placeholder="Enter number" />
+        <button id="confirmBtn">OK</button>
+      `;
+      document.body.appendChild(dialog);
+
+      document.getElementById("confirmBtn").onclick = function () {
+        const val = parseInt(document.getElementById("goalInput").value);
+        if (!val || val <= 0) return alert("Enter a valid number.");
+        localStorage.setItem(key, val);
+        document.body.removeChild(dialog);
+        callback();
+      };
     }
 
-    function handleDialogOk() {
-      const val = parseInt(document.getElementById("dialogInput").value);
+    function showWelcome(username) {
+      const dialog = document.createElement("div");
+      dialog.className = "custom-dialog";
+      dialog.innerHTML = `
+        <p>Welcome ${username}</p>
+        <button onclick="goToMenu()">OK</button>
+      `;
+      document.body.appendChild(dialog);
+    }
 
-      if (step === 1) {
-        if (isNaN(val) || val <= 0) return;
-        userData.runningGoal = val;
-        step = 2;
-        showDialog("How many push-ups do you want to do?");
-      } else if (step === 2) {
-        if (isNaN(val) || val <= 0) return;
-        userData.pushupsGoal = val;
-        step = 3;
-        showDialog("How many sit-ups do you want to do?");
-      } else if (step === 3) {
-        if (isNaN(val) || val <= 0) return;
-        userData.situpsGoal = val;
-        document.getElementById("dialogBox").style.display = "none";
-        setTimeout(() => {
-          showDialog("Welcome " + username, true);
-          step = 4;
-        }, 1000);
-      } else if (step === 4) {
-        userData.level = 1;
-        userData.strength = 0;
-        userData.speed = 0;
-        userData.health = 0;
-        userData.points = 3;
-        userData.runningProgress = 0;
-        userData.pushupsProgress = 0;
-        userData.situpsProgress = 0;
-
-        localStorage.setItem("data_" + username, JSON.stringify(userData));
-        window.location.href = "menu.html";
-      }
+    function goToMenu() {
+      window.location.href = "Menu.html";
     }
   </script>
 </body>
