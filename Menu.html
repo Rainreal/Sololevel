@@ -222,23 +222,4 @@
 
     function updateDisplay() {
       document.getElementById("strength").textContent = userData.strength;
-      document.getElementById("speed").textContent = userData.speed;
-      document.getElementById("health").textContent = userData.health;
-      document.getElementById("points").textContent = userData.points;
-    }
-
-    function confirmLogout() {
-      document.getElementById("confirmBox").style.display = "block";
-    }
-
-    function logout(deleteData) {
-      document.getElementById("confirmBox").style.display = "none";
-      if (deleteData) {
-        localStorage.removeItem("data_" + username);
-        localStorage.removeItem("username");
-      }
-      window.location.href = "index.html";
-    }
-  </script>
-</body>
-</html>
+      document.getElementById
