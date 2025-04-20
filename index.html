@@ -35,7 +35,7 @@
         step = 1;
         showDialog("How much running do you want to do?");
       } else {
-        window.location.href = "menu.html"; <!-- Ensure file name matches exactly (menu.html) -->
+        window.location.href = "Menu.html";  <!-- Make sure "menu.html" exists -->
       }
     }
 
@@ -78,7 +78,7 @@
         userData.situpsProgress = 0;
 
         localStorage.setItem("data_" + username, JSON.stringify(userData));
-        window.location.href = "menu.html"; <!-- Ensure file name matches exactly (menu.html) -->
+        window.location.href = "Menu.html"; <!-- Ensure "Menu.html" exists in the root folder -->
       }
     }
   </script>

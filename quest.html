@@ -85,10 +85,39 @@
     const username = localStorage.getItem("username");
     const userData = JSON.parse(localStorage.getItem("data_" + username));
 
+    // Initialisieren der Fortschrittsanzeige
     if (userData) {
       document.getElementById("running-progress").textContent = `${userData.runningProgress || 0} / ${userData.runningGoal}`;
       document.getElementById("pushups-progress").textContent = `${userData.pushupsProgress || 0} / ${userData.pushupsGoal}`;
       document.getElementById("situps-progress").textContent = `${userData.situpsProgress || 0} / ${userData.situpsGoal}`;
+    }
+
+    // Variablen für die Schritte und Bewegung
+    let steps = 0;
+    let lastUpdate = Date.now();
+    const runningGoal = userData ? userData.runningGoal : 1000;
+
+    // Funktion zur Schrittezählung (DeviceMotionEvent)
+    function countSteps(event) {
+      if (Date.now() - lastUpdate < 500) return; // Verhindert zu häufiges Aktualisieren
+
+      // Zählt Schritte nur, wenn Bewegung erkannt wird
+      if (event.acceleration.x > 2 || event.acceleration.y > 2 || event.acceleration.z > 2) {
+        steps++;
+        document.getElementById("running-progress").textContent = `${steps} / ${runningGoal}`;
+        
+        // Fortschritt in localStorage speichern
+        userData.runningProgress = steps;
+        localStorage.setItem("data_" + username, JSON.stringify(userData));
+      }
+      lastUpdate = Date.now();
+    }
+
+    // Event Listener für die Gerätebewegung (nur auf Handys)
+    if (window.DeviceMotionEvent) {
+      window.addEventListener("devicemotion", countSteps, false);
+    } else {
+      console.log("DeviceMotionEvent nicht unterstützt. Funktioniert nur auf mobilen Geräten.");
     }
   </script>
 </body>
